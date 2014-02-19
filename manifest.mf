@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: cch.templates
+OpenIDE-Module-Localizing-Bundle: cch/templates/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
