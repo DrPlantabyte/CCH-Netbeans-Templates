@@ -52,6 +52,7 @@ public class PortableJarWizardIterator implements WizardDescriptor./*Progress*/I
 
 	private final String appNameSymbol = "__PROJECTNAME__";
 	private final String appMainSymbol = "//__PROJECTMAINMETHOD__";
+	private final String propertyNameSymbol = "PortableJarNetbeansTemplate";
 	
 	private int index;
 	private WizardDescriptor.Panel[] panels;
@@ -127,6 +128,13 @@ public class PortableJarWizardIterator implements WizardDescriptor./*Progress*/I
 			}
 			Files.write((new File(dirF.getPath() + File.separator + "src" 
 					+ File.separator + "main" + File.separator + "Main.java")).toPath(),allLines, Charset.forName("UTF-8"));
+			File propertiesFile = (new File(dirF.getPath() + File.separator + "nbproject" 
+					+ File.separator + "project.properties"));
+			List<String> allLines2 = Files.readAllLines(propertiesFile.toPath(), Charset.forName("UTF-8"));
+			for(int i = 0; i < allLines2.size(); i++){
+				allLines2.set(i, allLines2.get(i).replace(propertyNameSymbol, className));
+			}
+			Files.write(propertiesFile.toPath(),allLines2, Charset.forName("UTF-8"));
 			
 			
 		}catch(IOException ex){
